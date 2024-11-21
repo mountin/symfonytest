@@ -16,9 +16,9 @@ class BookType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('Author', EntityType::class, ['class' => Author::class]  )
+            ->add('authorId', EntityType::class, ['class' => Author::class]  )
 
-            //->add('Author')
+            //->add('authorId')
             //->add(Author::class)
             ->add('description')
             ->add('value')

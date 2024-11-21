@@ -22,8 +22,8 @@ class Book
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 2, scale: 2, nullable: true)]
-    private ?string $value = null;
+    #[ORM\Column(nullable: true)]
+    private ?int $value = null;
 
     /**
      * @var Collection<int, Author>

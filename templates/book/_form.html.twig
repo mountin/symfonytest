@@ -1,8 +1,7 @@
-
 {{ form_errors(form) }}
 <form name="book" method="post">
-
-
+    {#{{ form_rest(form) }}#}
+    {{ form_row(form._token) }}
     <table>
     <tr>
         <td>Title: </td>
@@ -14,12 +13,12 @@
     </tr>
     <tr>
         <td>Value: </td>
-        <td> <input name="book[value]" required="required"> </td>
+        <td> <input name="book[value]"> </td>
     </tr>
         <tr>
             <td>Author: </td>
             <td>
-                <select name="authorId" class="select" style="width: 200px;">
+                <select name="book[authorId]" class="select" style="width: 200px;">
 
                     <option></option>
                 {% for author in authors %}
@@ -29,6 +28,7 @@
 
 
                 {% endfor %}
+                    </select>
             </td>
         </tr>
     </table>

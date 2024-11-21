@@ -70,7 +70,7 @@ final class BookController extends AbstractController
 
             //$form->get('author');
 
-
+//dump($form);die('fg');
 
             $entityManager->persist($book);
             $entityManager->flush();
