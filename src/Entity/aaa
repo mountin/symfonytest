@@ -1,0 +1,5 @@
+The property "Author" in class "App\Entity\Book" can be
+defined with the methods "addAuthor()", "removeAuthor()" but the new value
+must be an array or an instance of \Traversable. Make the property public,
+ add a setter, or set
+the "mapped" field option in the form type to be false.

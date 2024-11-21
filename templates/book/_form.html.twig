@@ -1,0 +1,37 @@
+
+{{ form_errors(form) }}
+<form name="book" method="post">
+
+
+    <table>
+    <tr>
+        <td>Title: </td>
+        <td> <input name="book[title]" required="required"> </td>
+    </tr>
+    <tr>
+        <td>Description: </td>
+        <td> <input name="book[description]" required="required"> </td>
+    </tr>
+    <tr>
+        <td>Value: </td>
+        <td> <input name="book[value]" required="required"> </td>
+    </tr>
+        <tr>
+            <td>Author: </td>
+            <td>
+                <select name="authorId" class="select" style="width: 200px;">
+
+                    <option></option>
+                {% for author in authors %}
+
+
+                    <option value="{{ author.id }}">{{ author.name }}</option>
+
+
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
+ </form>
