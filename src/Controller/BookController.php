@@ -9,12 +9,15 @@ use App\Repository\BookRepository;
 use App\Repository\AuthorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\AdminController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+use Knp\Component\Pager\PaginatorInterface;
 
-#[Route('/book')]
+
+#[Route('/admin/book')]
 final class BookController extends AbstractController
 {
     private $entityManager;
@@ -25,11 +28,26 @@ final class BookController extends AbstractController
     }
 
     #[Route(name: 'app_book_index', methods: ['GET'])]
-    public function index(BookRepository $bookRepository): Response
+    public function index(BookRepository $bookRepository, PaginatorInterface $paginator, Request $request): Response
     {
+
+        // Fetch query builder for books
+        $queryBuilder = $bookRepository->createQueryBuilder('b');
+
+        // Paginate the results of the query
+        $pagination = $paginator->paginate(
+            $queryBuilder, // Query builder or array
+            $request->query->getInt('page', 1), // Current page number, default is 1
+            10 // Items per page
+        );
+
         return $this->render('book/index.html.twig', [
-            'books' => $bookRepository->findAll(),
+            'pagination' => $pagination,
         ]);
+
+//        return $this->render('book/index.html.twig', [
+//            'books' => $bookRepository->findAll(),
+//        ]);
     }
 
     #[Route('/new', name: 'app_book_new', methods: ['GET', 'POST'])]

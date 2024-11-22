@@ -1,0 +1,9 @@
+knp_paginator:
+    page_range: 5                      # Number of pages to display in pagination
+    default_options:
+        page_name: page                # Name of the query parameter for the page
+        sort_field_name: sort          # Query parameter for the sorting field
+        sort_direction_name: direction # Query parameter for sorting direction
+    template:
+        pagination: '@KnpPaginator/Pagination/sliding.html.twig' # Default template
+        sortable: '@KnpPaginator/Pagination/sortable_link.html.twig'
