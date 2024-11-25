@@ -18,19 +18,26 @@
         <tr>
             <td>Author: </td>
             <td>
-                <select name="book[authorId]" class="select" style="width: 200px;">
-
+                <select name="book[authorId]" class="select" style="width: 200px;" required>
                     <option></option>
                 {% for author in authors %}
-
-
                     <option value="{{ author.id }}">{{ author.name }}</option>
-
-
                 {% endfor %}
                     </select>
             </td>
         </tr>
+
+        <tr>
+            <td>Author: </td>
+            <td>
+                <select name="book[genre][]" class="select" style="width: 200px; height: 100px" multiple required="required">
+                    {% for genre in genres %}
+                        <option value="{{ genre.id }}">{{ genre.name }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+
     </table>
 
     <button class="btn">{{ button_label|default('Save') }}</button>

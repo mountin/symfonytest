@@ -31,9 +31,17 @@ class Book
     #[ORM\ManyToOne(inversedBy: 'books2')]
     public ?Author $authorId = null;
 
+    /**
+     * @var Collection<int, Genre>
+     */
+    #[ORM\ManyToMany(targetEntity: Genre::class)]
+
+    public Collection $genre;
+
     public function __construct()
     {
         $this->author = new ArrayCollection();
+        $this->genre = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -116,6 +124,30 @@ class Book
     public function setAuthorId(?Author $authorId): static
     {
         $this->authorId = $authorId;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Genre>
+     */
+    public function getGenre(): Collection
+    {
+        return $this->genre;
+    }
+
+    public function addGenre(Genre $genre): static
+    {
+        if (!$this->genre->contains($genre)) {
+            $this->genre->add($genre);
+        }
+
+        return $this;
+    }
+
+    public function removeGenre(Genre $genre): static
+    {
+        $this->genre->removeElement($genre);
 
         return $this;
     }

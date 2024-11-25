@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Book;
 use App\Entity\Author;
+use App\Entity\Genre;
 use App\Form\BookType;
 use App\Repository\BookRepository;
 use App\Repository\AuthorRepository;
@@ -25,6 +26,7 @@ final class BookController extends AbstractController
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
+
     }
 
     #[Route(name: 'app_book_index', methods: ['GET'])]
@@ -45,9 +47,6 @@ final class BookController extends AbstractController
             'pagination' => $pagination,
         ]);
 
-//        return $this->render('book/index.html.twig', [
-//            'books' => $bookRepository->findAll(),
-//        ]);
     }
 
     #[Route('/new', name: 'app_book_new', methods: ['GET', 'POST'])]
@@ -73,23 +72,16 @@ final class BookController extends AbstractController
     #[Route('/add', name: 'app_book_new', methods: ['GET', 'POST'])]
     public function add(Request $request, EntityManagerInterface $entityManager): Response
     {
-
-
         $authors = $entityManager->getRepository(Author::class)->findAll();
+        $genres = $entityManager->getRepository(Genre::class)->findAll();
 
         $book = new Book();
-
         $form = $this->createForm(BookType::class, $book);
+        //dump($genres); die;
 
         $form->handleRequest($request);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
-
-            //$form->get('author');
-
-//dump($form);die('fg');
-
             $entityManager->persist($book);
             $entityManager->flush();
 
@@ -99,6 +91,7 @@ final class BookController extends AbstractController
         return $this->render('book/add.html.twig', [
             'book' => $book,
             'authors' => $authors,
+            'genres' => $genres,
             'form' => $form,
         ]);
     }
