@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Book;
+use App\Entity\Genre;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,9 +17,16 @@ class BookType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('Author', EntityType::class, ['class' => Author::class]  )
+            ->add('authorId', EntityType::class, ['class' => Author::class]  )
 
-            //->add('Author')
+//            ->add('genre', EntityType::class, [
+//                'class' => Genre::class,
+//                'choice_label' => 'genres',
+//                'multiple' => true, // Allows selecting multiple groups
+//                'expanded' => true,  // Render checkboxes for the user to select multiple groups
+//            ])
+
+            //->add('authorId')
             //->add(Author::class)
             ->add('description')
             ->add('value')
