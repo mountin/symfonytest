@@ -5,8 +5,6 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use App\Controller\AdminController;
-use App\Repository\BookRepository;
 
 
 
@@ -20,7 +18,7 @@ class AdminController extends AbstractController
             'controller_name' => 'AdminController',
         ]);
     }
-    protected function renderAdminTemplate(string $template, array $data = []): \Symfony\Component\HttpFoundation\Response
+    protected function renderAdminTemplate(string $template, array $data = []): Response
     {
         return $this->render($template, $data);
     }

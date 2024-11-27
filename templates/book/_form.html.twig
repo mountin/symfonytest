@@ -1,44 +1,10 @@
 {{ form_errors(form) }}
 <form name="book" method="post">
-    {#{{ form_rest(form) }}#}
     {{ form_row(form._token) }}
-    <table>
-    <tr>
-        <td>Title: </td>
-        <td> <input name="book[title]" required="required"> </td>
-    </tr>
-    <tr>
-        <td>Description: </td>
-        <td> <input name="book[description]" required="required"> </td>
-    </tr>
-    <tr>
-        <td>Value: </td>
-        <td> <input name="book[value]"> </td>
-    </tr>
-        <tr>
-            <td>Author: </td>
-            <td>
-                <select name="book[authorId]" class="select" style="width: 200px;" required>
-                    <option></option>
-                {% for author in authors %}
-                    <option value="{{ author.id }}">{{ author.name }}</option>
-                {% endfor %}
-                    </select>
-            </td>
-        </tr>
-
-        <tr>
-            <td>Genre: </td>
-            <td>
-                <select name="book[genre][]" class="select" style="width: 200px; height: 100px" multiple required="required">
-                    {% for genre in genres %}
-                        <option value="{{ genre.id }}">{{ genre.name }}</option>
-                    {% endfor %}
-                </select>
-            </td>
-        </tr>
-
-    </table>
-
+    {{ form_row(form.title) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.value) }}
+    {{ form_row(form.author) }}
+    {{ form_row(form.genre) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
- </form>
+</form>

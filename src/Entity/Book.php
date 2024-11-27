@@ -25,22 +25,19 @@ class Book
     #[ORM\Column(nullable: true)]
     private ?int $value = null;
 
-    /**
-     * @var Collection<int, Author>
-     */
-    #[ORM\ManyToOne(inversedBy: 'books2')]
-    public ?Author $authorId = null;
+      #[ORM\ManyToOne(inversedBy: 'books')]
+    private ?Author $author = null;
 
     /**
      * @var Collection<int, Genre>
      */
-    #[ORM\ManyToMany(targetEntity: Genre::class)]
+    #[ORM\ManyToMany(targetEntity: Genre::class, mappedBy: 'books')]
 
-    public Collection $genre;
+    private Collection $genre;
 
     public function __construct()
     {
-        $this->author = new ArrayCollection();
+        
         $this->genre = new ArrayCollection();
     }
 
@@ -74,63 +71,29 @@ class Book
         return $this;
     }
 
-    public function getValue(): ?string
+    public function getValue(): ?int
     {
         return $this->value;
     }
 
-    public function setValue(?string $value): static
+    public function setValue(?int $value): static
     {
         $this->value = $value;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Author>
-     */
-    public function getAuthor(): Collection
+    public function getAuthor(): ?Author
     {
         return $this->author;
     }
 
-    public function addAuthor(Author $author): static
+    public function setAuthor(?Author $author): static
     {
-        if (!$this->author->contains($author)) {
-            $this->author->add($author);
-            $author->setBook($this);
-        }
-
+        $this->author = $author;
         return $this;
     }
 
-    public function removeAuthor(Author $author): static
-    {
-        if ($this->author->removeElement($author)) {
-            // set the owning side to null (unless already changed)
-            if ($author->getBook() === $this) {
-                $author->setBook(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getAuthorId(): ?Author
-    {
-        return $this->authorId;
-    }
-
-    public function setAuthorId(?Author $authorId): static
-    {
-        $this->authorId = $authorId;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Genre>
-     */
     public function getGenre(): Collection
     {
         return $this->genre;
@@ -151,5 +114,4 @@ class Book
 
         return $this;
     }
-
 }
