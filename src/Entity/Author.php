@@ -24,20 +24,19 @@ class Author
     /**
      * @var Collection<int, Book>
      */
-//    #[ORM\OneToMany(targetEntity: Book::class, mappedBy: 'authorId')]
+//    #[ORM\OneToMany(targetEntity: Book::class, mappedBy: 'author')]
 //    private Collection $books;
 
     /**
      * @var Collection<int, Book>
      */
-    #[ORM\OneToMany(targetEntity: Book::class, mappedBy: 'authorId')]
-    private Collection $books2;
+    #[ORM\OneToMany(targetEntity: Book::class, mappedBy: 'author')]
+    private Collection $books;
 
 
     public function __construct()
     {
         $this->books = new ArrayCollection();
-        $this->books2 = new ArrayCollection();
     }
 
     public function getId(): ?int

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Genre;
 use App\Form\Genre1Type;
+use App\Form\GenreType;
 use App\Repository\GenreRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +27,7 @@ final class GenreController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $genre = new Genre();
-        $form = $this->createForm(Genre1Type::class, $genre);
+        $form = $this->createForm(GenreType::class, $genre);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -53,7 +54,7 @@ final class GenreController extends AbstractController
     #[Route('/{id}/edit', name: 'app_genre_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Genre $genre, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(Genre1Type::class, $genre);
+        $form = $this->createForm(GenreType::class, $genre);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

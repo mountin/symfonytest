@@ -17,19 +17,18 @@ class BookType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('authorId', EntityType::class, ['class' => Author::class]  )
-
-//            ->add('genre', EntityType::class, [
-//                'class' => Genre::class,
-//                'choice_label' => 'genres',
-//                'multiple' => true, // Allows selecting multiple groups
-//                'expanded' => true,  // Render checkboxes for the user to select multiple groups
-//            ])
-
-            //->add('authorId')
-            //->add(Author::class)
+            ->add('author', EntityType::class, [
+                'class' => Author::class,
+                'choice_label' => 'name',
+            ])
             ->add('description')
             ->add('value')
+            ->add('genre', EntityType::class, [
+                'class' => Genre::class,
+                'choice_label' => 'name',
+                'multiple' => true,  // Permet de sélectionner plusieurs genres
+                'expanded' => true,  // Affichage sous forme de checkboxes
+            ])
         ;
     }
 
